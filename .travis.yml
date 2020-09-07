@@ -1,10 +1,11 @@
+language: generic 
 sudo: required
 services:
   - docker
 before_install:
   - docker build -t mitpat/docker-redis -f Dockerfile.dev .
 script:
-  - docker run mitpat/docker-redis npm run test -- --coverage
+  - docker run -e CI=true mitpat/docker-redis npm run test
 deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
